@@ -27,6 +27,7 @@ void selectionSort ( char ** nomes, int qtd ) {
     int i, j, min;
     char * temp;
 
+
     for ( i = 0; i < qtd; i ++ ) {
         min = i;
         for ( j = i +1; j < qtd; j ++ ) {
