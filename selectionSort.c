@@ -8,13 +8,13 @@ typedef struct pessoa{
 }pessoa;
 
 void ordena ( pessoa * vet );
-void FinsertionSort ( pessoa * vet );
 void IinsertionSort ( pessoa * vet );
 void SinsertionSort ( pessoa * vet );
 void imprimir ( pessoa * vet );
+void FinsertionSort ( pessoa * vet);
 
 int main ( ) {
-	pessoa vet[2];
+	pessoa vet[3];
 	int i = 0;
 
 	ordena ( vet );
@@ -29,7 +29,7 @@ void ordena ( pessoa * vet ) {
 	
 	switch ( i ) {
 		case 1:
-			for ( i = 0; i < 2; i ++ ){
+			for ( i = 0; i < 3; i ++ ){
 				scanf ("%d", &vet[i]. Matricula );
 				scanf ("%s", vet[i]. Nome);
 				scanf ("%f", &vet[i]. Nota);
@@ -38,7 +38,7 @@ void ordena ( pessoa * vet ) {
 			imprimir (vet);
 			break;
 		case 2:
-			for ( i = 0; i < 2; i ++ ){
+			for ( i = 0; i < 3; i ++ ){
 				scanf ("%d", &vet[i]. Matricula );
 				scanf ("%s", vet[i]. Nome);
 				scanf ("%f", &vet[i]. Nota);
@@ -47,7 +47,7 @@ void ordena ( pessoa * vet ) {
 			imprimir (vet);
 			break;
 		case 3:
-			for ( i = 0; i < 2; i ++ ){
+			for ( i = 0; i < 3; i ++ ){
 				scanf ("%d", &vet[i]. Matricula );
 				scanf ("%s", vet[i]. Nome);
 				scanf ("%f", &vet[i]. Nota);
@@ -61,7 +61,7 @@ void ordena ( pessoa * vet ) {
 }
 
 void imprimir ( pessoa * vet ) {
-	for ( int i = 0; i < 2; i ++ ){
+	for ( int i = 0; i < 3; i ++ ){
 		printf ("\n");
 		printf ("\n");
 		printf ("%d \n", vet[i]. Matricula );
@@ -69,45 +69,52 @@ void imprimir ( pessoa * vet ) {
 		printf ("%f\n", vet[i]. Nota);
 	}
 }
-void IinsertionSort ( pessoa * vet) {
-	int i, j;
+void IinsertionSort ( pessoa * vet ) {
+	int i, j, min;
 	pessoa temp;
 
-	for ( i = 1; i < 2; i ++ ) {
-		j = i -1;
-		temp = vet[i];
-		while ( j >= 0 && vet[j]. Matricula > temp. Matricula ) {
-			vet[j+1] = vet[j];
-			j --;
-		} 
-		vet[j+1] = temp; 
-	}
+    for ( i = 0; i < 3; i ++ ) {
+        min = i;
+        for ( j = i +1; j < 3; j ++ ){
+            if ( vet[min]. Matricula > vet[j]. Matricula ) {
+                min = j;
+            }
+        }
+        temp = vet[i];
+        vet[i] = vet[min];
+        vet[min] = temp;
+    }
 }
 void FinsertionSort ( pessoa * vet) {
-	int i, j;
+	int i, j, min;
 	pessoa temp;
 
-	for ( i = 1; i < 2; i ++ ) {
-		j = i -1;
-		temp = vet[i];
-		while ( j >= 0 && vet[j]. Nota > temp. Nota ) {
-			vet[j+1] = vet[j];
-			j --;
-		} 
-		vet[j+1] = temp; 
-	}
+    for ( i = 0; i < 3; i ++ ) {
+        min = i;
+        for ( j = i +1; j < 3; j ++ ){
+            if ( vet[min]. Nota > vet[j]. Nota ) {
+                min = j;
+            }
+        }
+        temp = vet[i];
+        vet[i] = vet[min];
+        vet[min] = temp;
+    }
 }
 void SinsertionSort ( pessoa * vet) {
-	int i, j;
+	int i, j, min;
 	pessoa temp;
 
-	for ( i = 1; i < 2; i ++ ) {
-		j = i -1;
-		temp = vet[i];
-		while ( j >= 0 && ( strcmp (vet[j]. Nome, temp. Nome) > 0 ) ) {
-			vet[j+1] = vet[j];
-			j --;
-		} 
-		vet[j+1] = temp; 
-	}
+    for ( i = 0; i < 3; i ++ ) {
+        min = i;
+        for ( j = i +1; j < 3; j ++ ){
+            if ( strcmp (vet[min]. Nome, vet[j]. Nome) > 0 ) {
+                min = j;
+            }
+        }
+        temp = vet[i];
+        vet[i] = vet[min];
+        vet[min] = temp;
+    }
 }
+		 
