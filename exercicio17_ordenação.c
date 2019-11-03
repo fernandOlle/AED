@@ -10,7 +10,7 @@ void inserirOrdenado ( char ** array, int n );
 void imprimir ( char ** array, int n );
 
 int main ( ) {
-  char ** array; 
+  char ** array;  
   int n;
 
   scanf ("%d", &n);
