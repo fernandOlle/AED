@@ -3,7 +3,7 @@ utilizando a ideia do algoritmo insertion sort. No final, o programa deve mostra
 nomes ordenados alfabeticamente. */
 
 #include  <stdio.h>
-#include <string.h>
+#include <string.h>   
 #include <stdlib.h>
 
 void inserirOrdenado ( char ** array, int n );
