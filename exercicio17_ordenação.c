@@ -8,7 +8,7 @@ nomes ordenados alfabeticamente. */
 
 void inserirOrdenado ( char ** array, int n );
 void imprimir ( char ** array, int n );
-
+ 
 int main ( ) {
   char ** array;  
   int n;
@@ -19,7 +19,7 @@ int main ( ) {
   for ( int i = 0; i < n; i ++ ) {
     array[i] = (char *) malloc(sizeof(char) *10);
     scanf ("%s", array[i]);
-    inserirOrdenado ( array, n );
+    inserirOrdenado ( array, n );   
   }
   imprimir ( array, n );
 
