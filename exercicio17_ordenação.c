@@ -11,7 +11,7 @@ void imprimir ( char ** array, int n );
  
 int main ( ) {
   char ** array;  
-  int n;
+  int n;   
 
   scanf ("%d", &n);
   array = (char **) malloc(sizeof(char *) *n);    
