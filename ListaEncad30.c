@@ -23,35 +23,38 @@ typedef struct Lista {
   struct Lista * prox;
 } Lista;
 
-void start (Lista *cabeca);
+Lista * start (Lista *cabeca);
 void menu();
-void push (Lista *cabeca);
+Lista * push (Lista *cabeca);
 void imprimir (Lista *cabeca);
-void pop (Lista *cabeca);
+Lista * pop (Lista *cabeca);
 void reset (Lista *cabeca);
 
 int main () {
-  Lista * cabeca;
+  Lista *cabeca;
   int i;
 
-  start (cabeca);
+  cabeca = start (cabeca);
   do {
     menu ();
     scanf ("%d", &i);
     switch (i)
     {
     case 1:
-      push (cabeca);
+      cabeca = push (cabeca);
       break;
     case 2:
       imprimir (cabeca);
       break;
     case 3:
-      pop (cabeca);
+      cabeca = pop (cabeca);
       break;
     case 4:
       reset (cabeca);
-      start (cabeca);
+      cabeca = start (cabeca);
+      break;
+    case 5: 
+      reset (cabeca);
       break;
 
     default:
@@ -61,7 +64,7 @@ int main () {
   return 0;
 }
 
-void start (Lista *cabeca) {
+Lista * start (Lista *cabeca) {
   cabeca = (Lista *) malloc(sizeof(Lista));
   cabeca->prox = NULL;
   Lista *novaCabeca = cabeca;
@@ -71,28 +74,32 @@ void start (Lista *cabeca) {
   printf ("Entre a potencia maior do polinomio : ");
   scanf ("%d", &potencia);
 
-  for (int i = potencia ; i > 0; i --) {
+  for (int i = potencia ; i >= 0; i --) {
     Lista *cell;
     cell = (Lista *) malloc(sizeof(Lista));
     novaCabeca->prox = cell;
-    novaCabeca = novaCabeca->prox;
+    novaCabeca = novaCabeca->prox; 
     printf ("entre o valor de A para o termo numero %d do polinomio : ", (potencia +1) -i);
     scanf ("%d", &a);
     novaCabeca->poli.a = a;
-    novaCabeca->poli.a = i;
+    novaCabeca->poli.potencia = i;
   }
   novaCabeca->prox = NULL;
+  
+  return cabeca;
 }
 void menu () {
+  printf ("\n");
   printf ("\n");
   printf ("1 = push\n");
   printf ("2 = lista\n");
   printf("3 = pop\n");
-  printf ("4 = reset");
+  printf ("4 = reset\n");
+  printf ("5 = sair");
   printf ("\n");
   printf ("\n");
 }
-void push (Lista *cabeca) {
+Lista * push (Lista *cabeca) {
   Lista *novoTermo;
   novoTermo = (Lista *) malloc(sizeof(Lista));
    
@@ -106,16 +113,26 @@ void push (Lista *cabeca) {
   scanf ("%d", &novoTermo->poli.a);
   printf ("entre nova potencia para o novo termo do polinomio : ");
   scanf ("%d", &novoTermo->poli.potencia);
+
+  return cabeca;
 }
 void imprimir (Lista *cabeca) { 
-  for (cabeca = cabeca->prox; cabeca->prox != NULL; cabeca = cabeca->prox) {
-    if (cabeca->prox) {
+  for (cabeca = cabeca->prox; cabeca != NULL; cabeca = cabeca->prox) {
+    if (cabeca->poli.potencia && cabeca->prox) {
       printf ("%d . x^%d ", cabeca->poli.a, cabeca->poli.potencia);
       printf ("+");
-    } else printf ("%d . x^%d ", cabeca->poli.a, cabeca->poli.potencia); 
+    } else if (!cabeca->poli.potencia) { 
+      printf ("%d ", cabeca->poli.a);
+      if (cabeca->prox)
+         printf ("+");
+    } else if (cabeca->poli.potencia) {
+      printf ("%d . x^%d ", cabeca->poli.a, cabeca->poli.potencia);
+      if (cabeca->prox)
+        printf ("+");
+    }
   }
 }
-void pop (Lista *cabeca) {
+Lista * pop (Lista *cabeca) {
   int index, i;
   Lista *remover;
   printf ("entre indice do polinomio que se deseja tirar : ");
@@ -125,11 +142,13 @@ void pop (Lista *cabeca) {
     i ++, remover = remover->prox, cabeca = cabeca->prox) {
       if (!cabeca && i < index) {
         printf ("index invalido");
-        return;
+        return cabeca;
       }
   }
   cabeca->prox = remover->prox;
   free (remover);
+
+  return cabeca;
 }
 void reset (Lista *cabeca) {
   cabeca = cabeca->prox;
