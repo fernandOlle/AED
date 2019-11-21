@@ -27,7 +27,7 @@ Lista * start (Lista *cabeca);
 void menu();
 Lista * push (Lista *cabeca);
 void imprimir (Lista *cabeca);
-Lista * pop (Lista *cabeca);
+void pop (Lista *cabeca);
 void reset (Lista *cabeca);
 
 int main () {
@@ -47,7 +47,7 @@ int main () {
       imprimir (cabeca);
       break;
     case 3:
-      cabeca = pop (cabeca);
+      pop (cabeca);
       break;
     case 4:
       reset (cabeca);
@@ -131,8 +131,8 @@ void imprimir (Lista *cabeca) {
         printf ("+");
     }
   }
-}
-Lista * pop (Lista *cabeca) {
+}   
+void pop (Lista *cabeca) {
   int index, i;
   Lista *remover;
   printf ("entre indice do polinomio que se deseja tirar : ");
@@ -142,13 +142,11 @@ Lista * pop (Lista *cabeca) {
     i ++, remover = remover->prox, cabeca = cabeca->prox) {
       if (!cabeca && i < index) {
         printf ("index invalido");
-        return cabeca;
+        return;
       }
   }
   cabeca->prox = remover->prox;
   free (remover);
-
-  return cabeca;
 }
 void reset (Lista *cabeca) {
   cabeca = cabeca->prox;
