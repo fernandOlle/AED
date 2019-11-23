@@ -33,7 +33,7 @@ int main () {
 }
 /************ MAIN ACIMA ************/
 void ** allocBuffer (void **buffer) {
-  buffer = (void **) malloc(sizeof(void *) *4);
+  buffer = (void **) malloc(sizeof(void *) *3);
   buffer[0] = (int *) malloc(sizeof(int));
   buffer[1] = (float *) malloc(sizeof(float));
   buffer[2] = (double *) malloc(sizeof(double));
