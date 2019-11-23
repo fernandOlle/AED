@@ -8,9 +8,9 @@ typedef struct starts {
 } Starts;
 Starts startsIndex;
 
-#define INT startsIndex.intStart*sizeof(int)
-#define FLOAT startsIndex.floatStart*sizeof(float)
-#define DOUBLE startsIndex.doubleStart*sizeof(double)
+#define INT startsIndex.intStart
+#define FLOAT startsIndex.floatStart
+#define DOUBLE startsIndex.doubleStart
 
 void ** allocBuffer (void **buffer);
 void ** pushBuffer (void **buffer);
@@ -74,27 +74,27 @@ void ** pushBuffer (void **buffer) {
 void * pushInt (void *buffer) {
   int newInt;
   scanf ("%d", &newInt);
-  startsIndex.intStart ++;
-  buffer = (int *) realloc(buffer, sizeof(int) *startsIndex.intStart);
-  *(int *) (buffer +(sizeof(int) *(startsIndex.intStart -1))) = newInt;
+  INT ++;
+  buffer = (int *) realloc(buffer, sizeof(int) *INT);
+  *(int *) (buffer +(sizeof(int) *(INT -1))) = newInt;
 
   return buffer;
 }
 void * pushFloat (void *buffer) {
   float newFloat;
   scanf ("%f", &newFloat);
-  startsIndex.floatStart ++;
-  buffer = (float *) realloc(buffer, sizeof(float) *startsIndex.floatStart);
-  *(float *) (buffer +(sizeof(float) *(startsIndex.floatStart -1))) = newFloat;
+  FLOAT ++;
+  buffer = (float *) realloc(buffer, sizeof(float) *FLOAT);
+  *(float *) (buffer +(sizeof(float) *(FLOAT -1))) = newFloat;
 
   return buffer;
 }
 void * pushDouble (void *buffer) {
   double newDouble;
   scanf ("%lf", &newDouble);
-  startsIndex.doubleStart ++;
-  buffer = (double *) realloc(buffer, sizeof(double) *startsIndex.doubleStart);
-  *(double *) (buffer +(sizeof(double) *(startsIndex.doubleStart -1))) = newDouble;
+  DOUBLE ++;
+  buffer = (double *) realloc(buffer, sizeof(double) *DOUBLE);
+  *(double *) (buffer +(sizeof(double) *(DOUBLE -1))) = newDouble;
   
   return buffer;
 }
@@ -104,28 +104,28 @@ void printBuffer (void **buffer) {
   printDouble (buffer[2]);  
 }
 void printInt (void *buffer) {
-  if (startsIndex.intStart) {
+  if (INT) {
     printf ("INT :");
     printf ("%d", *(int *)buffer);
-    for (int i = 1; i < startsIndex.intStart; i ++)
+    for (int i = 1; i < INT; i ++)
       printf (", %d", *(int *)(buffer+sizeof(int)*i));
   }
 }
 void printFloat (void *buffer) {
-  if (startsIndex.floatStart) {
+  if (FLOAT) {
     printf ("\n");
     printf ("FLOAT :");
     printf ("%f", *(float *)(buffer));
-    for (int i = 1; i < startsIndex.floatStart; i ++)
+    for (int i = 1; i < FLOAT; i ++)
       printf (", %f", *(float *)(buffer+sizeof(float)*i));
   }
 }
 void printDouble (void *buffer) {
-  if (startsIndex.doubleStart) {
+  if (DOUBLE) {
     printf ("\n");
     printf ("DOUBLE :");
     printf ("%lf", *(double *)(buffer));
-    for (int i = 1; i < startsIndex.doubleStart; i ++)
+    for (int i = 1; i < DOUBLE; i ++)
       printf (", %lf", *(double *)(buffer+sizeof(double)*i));
   }
 }
