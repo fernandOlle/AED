@@ -1,5 +1,11 @@
 {
+<<<<<<< HEAD
   "files.associations": {
     "stdio.h": "c"
   }
+=======
+  "code-runner.temporaryFileName": "a",
+  "code-runner.customCommand": "-g",
+  "code-runner.defaultLanguage": "C"
+>>>>>>> a7b4d50a0317818dbcc2197fd299e68a18c280de
 }

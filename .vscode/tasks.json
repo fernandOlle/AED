@@ -6,7 +6,11 @@
         {
             "type": "shell",
             "label": "gcc.exe build active file",
+<<<<<<< HEAD
             "command": "/usr/",
+=======
+            "command": "C:\\MinGW\\bin\\gcc.exe",
+>>>>>>> a7b4d50a0317818dbcc2197fd299e68a18c280de
             "args": [
                 "-std=c17",
                 "-Wall",
@@ -14,11 +18,19 @@
                 "-g",
                 "${file}",
                 "-o",
+<<<<<<< HEAD
                 "${fileDirname}\\a.exe"
+=======
+                "${fileDirname}\\codigo.exe"
+>>>>>>> a7b4d50a0317818dbcc2197fd299e68a18c280de
             ],
             "options": {
                 "cwd": "C:\\MinGW\\bin"
             }
         }
     ]
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> a7b4d50a0317818dbcc2197fd299e68a18c280de

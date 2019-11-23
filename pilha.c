@@ -1,32 +1,111 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-void insertionSort ( int * vet, int max );
-void imprimir ( int * vet );
+typedef struct Aluno {
+    char nome[10];
+    int matricula;  
+} Aluno;
+
+typedef struct Pilha {
+    Aluno *alunos;
+    Aluno *base;
+    Aluno *topo;
+    int capacidade;
+} Pilha;
+
+void reset (Pilha *pilha);
+void push (Pilha *pilha);
+void pop (Pilha *pilha);
+int empty (Pilha *pilha);
+void imprimir (Pilha *pilha);
+void clear (Pilha *pilha);
+Aluno * copiaPilha (Pilha *pilha);
 
 int main ( ) {
-    int vet[10] = {0, 9, 8, 7, 6, 5, 4, 3, 2, 1};
+    Pilha pilha;
+    int i = 0;
 
-    imprimir ( vet );
-    printf ("\n");
-    insertionSort ( vet, 10 );
-    imprimir ( vet );
+    do {
+        printf("entre op");
+        scanf("%d", &i);
+        switch (i)
+        {
+        case 1:
+            push (&pilha);
+            break;
+        case 2:
+            pop(&pilha);
+            break;
+        case 3:
+            clear(&pilha);
+            break;
+        case 4:
+            imprimir(&pilha);
+            break;
+
+        default:
+            break;
+        }
+    } while (i != 4);
 
     return 0;
 }
-void insertionSort ( int * vet, int max ) {
-    int i, j, temp;
 
-    for ( i = 1; i < max; i ++ ) {
-        j = i - 1;
-        temp = vet[i];
-        while ( j >= 0 && temp < vet[j] ){
-            vet[j+1] = vet[j];
-            j --;
-        } 
-        vet[j+1] = temp;
-    }
+void reset (Pilha *pilha) {
+    pilha->alunos = NULL;
+    pilha->base = NULL;
+    pilha->topo = NULL;
+    pilha->capacidade = 0;
+
+    pilha->alunos = (Aluno *) malloc(sizeof(Aluno));
+    pilha->base = NULL;
 }
-void imprimir ( int * vet ) {
-    for ( int i = 0; i < 10; i++ )
-        printf ("%d\n", vet[i] );
+void push (Pilha *pilha) {
+    Aluno novo;
+    
+    printf("entre nome");
+    scanf("%s",novo.nome);
+    printf("entre matricula");
+    scanf("%d", novo.matricula);
+    
+
+    pilha->capacidade ++;
+    pilha->alunos = (Aluno *) realloc(pilha->alunos, sizeof(Aluno)* pilha->capacidade);
+
+    pilha->alunos[pilha->capacidade] = novo;
+    pilha->base = &pilha->alunos[pilha->capacidade -1];
+    pilha->topo = pilha->alunos;
+}
+void pop (Pilha *pilha) {
+    if (empty(pilha)) {
+        pilha->capacidade --;
+        pilha = (Pilha *) malloc(sizeof(Pilha) * pilha->capacidade);
+        pilha-> alunos = copiaPilha(pilha);
+
+        pilha->topo = &pilha->alunos[pilha->capacidade];
+    } else return; 
+}
+int empty (Pilha *pilha) {
+    if (pilha->capacidade == 0) {
+        return 1;
+    } else return 0;
+}
+Aluno * copiaPilha (Pilha *pilha) {
+    Aluno * novo;
+    novo = (Aluno *) malloc (sizeof(Aluno) * pilha->capacidade);
+
+    for (int i = 0; i < pilha->capacidade; i ++)
+        novo[i] = pilha->alunos[i];
+
+    return novo;
+}
+void imprimir (Pilha *pilha) {
+
+}
+void clear (Pilha *pilha) {
+    pilha->alunos = NULL;
+    pilha->base = NULL;
+    pilha->topo = NULL;
+    pilha->capacidade = 0;
+    free(pilha->alunos);
 }

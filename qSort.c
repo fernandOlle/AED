@@ -1,3 +1,4 @@
+#include   <time.h>
 #include  <stdio.h>
 #include <stdlib.h> 
 
@@ -6,10 +7,14 @@ void imprimir ( int * array, int n );
 
 int main ( ) {
 
-    int array[10] = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+    int array[100];
+    srand(time(NULL));
+
+    for ( int i = 0; i < 100; i ++ )
+        array[i] = rand() % 1000;
 
     imprimir ( array, sizeof(array)/4 );
-    printf ("\n");
+    printf ("\n");printf ("\n");
     quickSort ( array, 0, sizeof(array)/4 );
     imprimir ( array, sizeof(array)/4 );
 
