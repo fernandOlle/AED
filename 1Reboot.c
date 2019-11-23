@@ -12,12 +12,12 @@ Starts startsIndex;
 #define FLOAT startsIndex.floatStart*sizeof(float)
 #define DOUBLE startsIndex.doubleStart*sizeof(double)
 
+int * pushInt (int *i);
 void * push (void *buffer);
-void * pushInt (void *buffer);
-void * pushFloat (void *buffer);
-void * pushDouble (void *buffer);
-void * bufferRealloc(void *buffer);
+float * pushFloat (float *f);
+double * pushDouble (double *d);
 void printBuffer (void *buffer);
+void * pushBuffer (int *i, float *f, double *d, void *bufer);
 
 int main () {
   startsIndex.intStart = startsIndex.floatStart = startsIndex.doubleStart = 0;
@@ -29,6 +29,7 @@ int main () {
 
 void * push (void *buffer) {
   int op;
+  int *i, *f, *d;
 
   do {
     printf ("\n\n1-Int\n2-Float\n3-Double\n4-Para\n\n");
@@ -36,15 +37,16 @@ void * push (void *buffer) {
 
     switch (op) {
       case 1:
-        buffer = pushInt (buffer);
+        i = pushInt (i);
         break;
       case 2:
-        buffer = pushFloat (buffer);
+        f = pushFloat (f);
         break;
       case 3:
-        buffer = pushDouble (buffer);
+        d = pushDouble (d);
         break;
       case 4:
+        buffer = pushBuffer (i, f, d, buffer);
         break;
 
       default:
@@ -53,28 +55,38 @@ void * push (void *buffer) {
   } while (op != 4);
   return buffer;
 }
-
-void * bufferRealloc(void *buffer) {
-  buffer = realloc (buffer, sizeof(int)*INT +sizeof(float)*FLOAT +sizeof(double)*DOUBLE);
-  return buffer;
+void * pushBuffer (int *i, float *f, double *d, void *bufer) {
+  
 }
-void * pushInt (void *buffer) {
+int * pushInt (int *i) {
+  int newI;
+  scanf ("%d", &newI);
   startsIndex.intStart ++;
-  buffer = bufferRealloc (buffer);
-  scanf ("%d", (int *)(buffer +INT -1));
-  return buffer;
+
+  i = (int *) realloc(i, sizeof(int)*INT);
+  i[INT -1] = newI;
+
+  return i;
 }
-void * pushFloat (void *buffer) {
+float * pushFloat (float *f) {
+  float newF;
+  scanf ("%d", &newF);
   startsIndex.floatStart ++;
-  buffer = bufferRealloc (buffer);
-  scanf ("%f", (float *)(buffer +INT +FLOAT -1));
-  return buffer;
+
+  f = (int *) realloc(f, sizeof(int)*FLOAT);
+  f[FLOAT -1] = newF;
+
+  return f;
 }
-void * pushDouble (void *buffer) {
+double * pushDouble (double *d) {
+  double newI;
+  scanf ("%d", &newI);
   startsIndex.doubleStart ++;
-  buffer = bufferRealloc (buffer);
-  scanf ("%lf", (double *)(buffer +INT +FLOAT +DOUBLE -1));
-  return buffer;
+
+  d = (int *) realloc(i, sizeof(int)*DOUBLE);
+  i[DOUBLE -1] = newI;
+
+  return d;
 }
 void printBuffer (void *buffer) {
   if (startsIndex.intStart) {
