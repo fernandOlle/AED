@@ -95,7 +95,7 @@ void * pushDouble (void *buffer) {
   startsIndex.doubleStart ++;
   buffer = (double *) realloc(buffer, sizeof(double) *startsIndex.doubleStart);
   *(double *) (buffer +(sizeof(double) *(startsIndex.doubleStart -1))) = newDouble;
-
+  
   return buffer;
 }
 void printBuffer (void **buffer) {
