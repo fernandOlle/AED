@@ -2,4 +2,4 @@ n`s maiores são melhores para casos de teste pois, por exemplo,
 algoritmos com complexidade nˆ2 podem parecer melhores que log n
 para n`s pequenos.
 quando se da um n grande a diferença entre log n e nˆ2 se mostra 
-claramente.
+claramente. 
