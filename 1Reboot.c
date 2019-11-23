@@ -29,7 +29,9 @@ int main () {
 
 void * push (void *buffer) {
   int op;
-  int *i, *f, *d;
+  int *i = (int *) malloc(sizeof(int));
+  float *f = (float *) malloc(sizeof(float));
+  double *d = (double *) malloc(sizeof(double));
 
   do {
     printf ("\n\n1-Int\n2-Float\n3-Double\n4-Para\n\n");
@@ -55,8 +57,22 @@ void * push (void *buffer) {
   } while (op != 4);
   return buffer;
 }
-void * pushBuffer (int *i, float *f, double *d, void *bufer) {
+void * pushBuffer (int *i, float *f, double *d, void *buffer) {
+  int qttI = INT;
+  int qttF = FLOAT;
+  int qttD = DOUBLE;
+  buffer = realloc (buffer, sizeof(int)*INT +sizeof(float)*FLOAT +sizeof(double)*DOUBLE);
+
+  for (int j = 0; j < INT; j ++) 
+    *(int *) (buffer +(sizeof(int)*j)) = i[j];
+
+  for (int j = 0; j < FLOAT; j ++) 
+    *(float *) (buffer +( (sizeof(int)*INT) +(sizeof(float)*j))) = f[j]; 
+    
+  for (int j = 0; j < DOUBLE; j ++) 
+    *(double *) (buffer +( (sizeof(int)*INT) +(sizeof(float)*FLOAT) +(sizeof(double)*j))) = d[j]; 
   
+  return buffer;
 }
 int * pushInt (int *i) {
   int newI;
@@ -73,7 +89,7 @@ float * pushFloat (float *f) {
   scanf ("%d", &newF);
   startsIndex.floatStart ++;
 
-  f = (int *) realloc(f, sizeof(int)*FLOAT);
+  f = (float *) realloc(f, sizeof(float)*FLOAT);
   f[FLOAT -1] = newF;
 
   return f;
@@ -83,8 +99,8 @@ double * pushDouble (double *d) {
   scanf ("%d", &newI);
   startsIndex.doubleStart ++;
 
-  d = (int *) realloc(i, sizeof(int)*DOUBLE);
-  i[DOUBLE -1] = newI;
+  d = (double *) realloc(d, sizeof(double)*DOUBLE);
+  d[DOUBLE -1] = newI;
 
   return d;
 }
