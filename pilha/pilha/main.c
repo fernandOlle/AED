@@ -17,7 +17,7 @@ Pilha pilha;
 
 Pilha push ();
 Pilha pop ();
-Pilha clear (Pilha pilha);
+Pilha clearP (Pilha pilha);
 Pilha reset ();
 Pilha listar ();
 Pilha empty ();
@@ -42,7 +42,7 @@ int main () {
         break;
 
       case 3:
-        pilha = clear (pilha);
+        pilha = clearP (pilha);
         break;
 
       case 4:
@@ -56,8 +56,8 @@ int main () {
       case 6:
         pilha = listar ();
 
-      default: 
-        break;     
+      default:
+        break;
     }
   } while (i != 7);
 
@@ -79,16 +79,14 @@ Pilha push () {
   if (pilha.topo < pilha.limite) {
     scanf ("%s", pilha.alunos[pilha.topo].nome);
     pilha.alunos[pilha.topo].iCod = (int)pilha.alunos[pilha.topo].nome;
-    pilha.topo ++; 
+    pilha.topo ++;
     if (pilha.topo == pilha.limite)
       printf("igualou");
   } else if (pilha.topo == pilha.limite) {
     printf("entrouu");
     Aluno aux[10];
-    for (int i = 0; i < 10 && pilha.topo >= 0; i ++) {
-      -- pilha.topo;
-      aux[i] = pilha.alunos[pilha.topo];
-    }
+    for (int i = 0; i < 10; i ++)
+      aux[i] = pilha.alunos[-- pilha.topo];
     for (int i = 8; i >= 0; i ++) {
       if (pilha.topo == 0)
         printf("ooooo");
@@ -106,7 +104,7 @@ Pilha pop () {
   } else printf ("pilha esta vazia");
   return pilha;
 }
-Pilha clear (Pilha pilha) {
+Pilha clearP (Pilha pilha) {
   pilha.topo = 0;
   pilha.base = 0;
   pilha.limite = 10;
@@ -115,9 +113,9 @@ Pilha clear (Pilha pilha) {
 }
 Pilha reset () {
   Pilha novaPilha;
-  novaPilha = clear (pilha);
+  novaPilha = clearP (pilha);
 
-  return novaPilha; 
+  return novaPilha;
 }
 Pilha listar () {
   while (pilha.topo -1 >= pilha.base) {
@@ -130,7 +128,7 @@ Pilha listar () {
   return novaPilha;
 }
 Pilha empty () {
-  pilha = clear (pilha);
+  pilha = clearP (pilha);
 
   return pilha;
 }

@@ -56,8 +56,8 @@ int main () {
       case 6:
         pilha = listar ();
 
-      default: 
-        break;     
+      default:
+        break;
     }
   } while (i != 7);
 
@@ -79,16 +79,14 @@ Pilha push () {
   if (pilha.topo < pilha.limite) {
     scanf ("%s", pilha.alunos[pilha.topo].nome);
     pilha.alunos[pilha.topo].iCod = (int)pilha.alunos[pilha.topo].nome;
-    pilha.topo ++; 
+    pilha.topo ++;
     if (pilha.topo == pilha.limite)
       printf("igualou");
   } else if (pilha.topo == pilha.limite) {
     printf("entrouu");
     Aluno aux[10];
-    for (int i = 0; i < 10 && pilha.topo >= 0; i ++) {
-      -- pilha.topo;
-      aux[i] = pilha.alunos[pilha.topo];
-    }
+    for (int i = 0; i < 10; i ++)
+      aux[i] = pilha.alunos[-- pilha.topo];
     for (int i = 8; i >= 0; i ++) {
       if (pilha.topo == 0)
         printf("ooooo");
@@ -117,7 +115,7 @@ Pilha reset () {
   Pilha novaPilha;
   novaPilha = clear (pilha);
 
-  return novaPilha; 
+  return novaPilha;
 }
 Pilha listar () {
   while (pilha.topo -1 >= pilha.base) {

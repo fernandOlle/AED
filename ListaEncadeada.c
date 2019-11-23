@@ -63,14 +63,12 @@ void start (No *ini) {
   ini->aluno = cabeca;
 }
 void push (No *ini) {
-  No *busca, *nova;
+  Prox busca, nova;
 
   nova = (No *) malloc (sizeof(No));
 
   printf("entre o nome :");
   scanf ("%s", nova->aluno.nome);
-  printf("entre o iCod :");
-  scanf ("%d", &nova->aluno.iCod);
 
   for (busca = ini; busca->prox != NULL && 
     busca->aluno.iCod < nova->aluno.iCod ; busca = busca-> prox);
@@ -79,7 +77,7 @@ void push (No *ini) {
   busca-> prox = nova;
 }
 void pop (No *ini) {
-  No *atual, *anterior;
+  Prox atual, anterior;
   int iCod;
 
   printf("entre icod :");
@@ -98,7 +96,7 @@ void pop (No *ini) {
   }
 }
 void listar (No *ini) {
-  for ( ; ini->prox != NULL; ini = ini-> prox){
+  for ( ; ini != NULL; ini = ini-> prox){
     printf ("%s", ini->aluno.nome);
     printf ("%d", ini->aluno.iCod);
   }
@@ -109,9 +107,10 @@ void search (No ini) {
 }
 */
 void clear (No *ini) {
-  ini = ini-> prox;
-  clear (ini);
-  free (ini);
+  while(ini-> prox != NULL) {
+    clear (ini);
+    free (ini);
+  }
 }
 void reset (No *ini) {
   clear (ini);
