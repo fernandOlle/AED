@@ -17,7 +17,6 @@ typedef struct line {
   Cell *head;
 } Line;
 
-
 Line *start (Line *line);
 void push (Line *line);
 Cell * pop (Line *line);
@@ -75,7 +74,7 @@ void push (Line *line) {
   printf ("entre o nome o aluno : ");
   scanf ("%s", newCell->data.name);
   printf ("entre o nuemro do aluno : ");
-  scanf ("%d", newCell->data.name);
+  scanf ("%d", &newCell->data.iData);
 
   if (empty(line)) {
     newCell->next = line->head->next;
