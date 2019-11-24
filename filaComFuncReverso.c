@@ -44,7 +44,7 @@ int main () {
         free (temp);
         break;
       case 3:
-        printLine (line);
+        printLine (line); 
         break;
       case 4:
         reverse (&line);
