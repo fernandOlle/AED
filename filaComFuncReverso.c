@@ -10,7 +10,7 @@ typedef struct data {
 
 typedef struct cell {
   Data data;
-  struct Cell *next;
+  struct cell *next;
 } Cell;
 
 typedef struct line {
@@ -33,14 +33,14 @@ int main () {
   do {
     menu ();
     scanf ("%d", &op);
+    Cell *temp;
     switch (op) {
       case 1:
         push (line);
         break;
       case 2:
-        Cell *temp = pop (line);
+        temp = pop (line);
         printf ("%s, %d", temp->data.name, temp->data.iData);
-        free (temp);
         break;
       case 3:
         printLine (line); 
@@ -58,6 +58,7 @@ int main () {
       default:
         break;
     }
+    free (temp);
   } while (op != 6);
   return 0;
 }
