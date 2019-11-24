@@ -13,46 +13,46 @@ typedef struct cell {
   struct cell *next;
 } Cell;
 
-typedef struct line {
+typedef struct queue {
   Cell *head;
-} Line;
+} Queue;
 
-Line *start (Line *line);
-void push (Line *line);
-Cell * pop (Line *line);
-void printLine (Line *line);
-void reverse (Line **line);
-void clear (Line *line);
-Line * reset (Line *line);
-bool empty (Line *line);
+Queue *start (Queue *queue);
+void push (Queue *queue);
+Cell * pop (Queue *queue);
+void printQueue (Queue *queue);
+void reverse (Queue **queue);
+void clear (Queue *queue);
+Queue * reset (Queue *queue);
+bool empty (Queue *queue);
 void menu ();
 
 int main () {
   int op;
-  Line *line = start (line);
+  Queue *queue = start (queue);
   do {
     menu ();
     scanf ("%d", &op);
     Cell *temp;
     switch (op) {
       case 1:
-        push (line);
+        push (queue);
         break;
       case 2:
-        temp = pop (line);
+        temp = pop (queue);
         printf ("%s, %d", temp->data.name, temp->data.iData);
         break;
       case 3:
-        printLine (line); 
+        printQueue (queue); 
         break;
       case 4:
-        reverse (&line);
+        reverse (&queue);
         break;
       case 5:
-        line = reset (line);
+        queue = reset (queue);
         break;
       case 6:
-        clear (line);
+        clear (queue);
         break;
       
       default:
@@ -63,82 +63,83 @@ int main () {
   return 0;
 }
 
-Line *start (Line *line) {
-  line = (Line *) malloc(sizeof(Line));
-  line->head = (Cell *) malloc(sizeof(Cell));
-  line->head->next = NULL;
-  return line;
+Queue *start (Queue *queue) {
+  queue = (Queue *) malloc(sizeof(Queue));
+  queue->head = (Cell *) malloc(sizeof(Cell));
+  queue->head->next = NULL;
+  return queue;
 }
-void push (Line *line) {
-  Cell *newCell;
-
+void push (Queue *queue) {
+  Cell *newCell = (Cell *) malloc(sizeof(Cell));
+  Cell *aux = queue->head;
   printf ("entre o nome o aluno : ");
   scanf ("%s", newCell->data.name);
   printf ("entre o nuemro do aluno : ");
   scanf ("%d", &newCell->data.iData);
 
-  if (empty(line)) {
-    newCell->next = line->head->next;
-    line->head->next = newCell;
+  if (empty(queue)) {
+    newCell->next = queue->head->next;
+    queue->head->next = newCell;
   } else {
-    while (line->head->next)
-      line->head = line->head->next;
+    while (aux->next)
+      aux = aux->next;
 
-    newCell->next = line->head->next;
-    line->head->next = newCell;
+    newCell->next = aux->next;
+    aux->next = newCell;
   }
 }
-Cell * pop (Line *line) {
+Cell * pop (Queue *queue) {
   Cell *kill = (Cell *) malloc(sizeof(Cell));
   kill->next = NULL;
 
-  kill = line->head->next;
+  kill = queue->head->next;
 
-  if (empty(line)) {
+  if (empty(queue)) {
     return NULL;
   } else {
-    kill = line->head->next;
-    line->head->next = kill->next;
+    kill = queue->head->next;
+    queue->head->next = kill->next;
     return kill;
   }
 }
-void printLine (Line *line) {
-  if (empty(line)) {
+void printQueue (Queue *queue) {
+  Cell *aux = queue->head;
+  if (empty(queue)) {
     printf ("lista vazia");
     return;
   } else {
-    while (line->head) {
-      line->head = line->head->next;
-      printf ("%s, %d\n", line->head->data.name, line->head->data.iData);
+    while (aux->next) {
+      aux = aux->next;
+      printf ("%s, %d\n", aux->data.name, aux->data.iData);
     }
   }
 }
-void reverse (Line **line) {
-  Cell *current = (*line)->head, *next = NULL, *prev = NULL;
+void reverse (Queue **queue) {
+  Cell *current = (*queue)->head->next, *next = NULL, *prev = NULL;
   while (current) {
     next = current->next;
     current->next = prev;
     prev = current;
     current = next;
   }
-  (*line)->head = prev;
+  (*queue)->head->next = prev;
 }
-void clear (Line *line) {
+void clear (Queue *queue) {
   Cell *kill;
-  while (line->head) {
-    kill = line->head;
-    line->head = line->head->next;
+  while (queue->head) {
+    kill = queue->head;
+    queue->head = queue->head->next;
     free (kill);
   }
-  free (line);
+  free (queue);
 }
-Line * reset (Line *line) {
-  clear (line);
-  line = start (line);
-  return line;
+Queue * reset (Queue *queue) {
+  clear (queue);
+  queue = start (queue);
+  return queue;
 }
-bool empty (Line *line) {
-  if (line->head->next)
+bool empty (Queue *queue) {
+  if (queue->head->next)
     return false;
   else return true;
 }
@@ -147,7 +148,7 @@ void menu () {
   printf ("\n");
   printf ("1-Posh\n");
   printf ("2-Pop\n");
-  printf ("3-PrintLine\n");
+  printf ("3-Printqueue\n");
   printf ("4-Reverse\n");
   printf ("5-Reset\n");
   printf ("6-Sair\n");
