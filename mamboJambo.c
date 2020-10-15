@@ -3,70 +3,60 @@
 #include <string.h>
 
 int main ( ) {
-  int i = 0;
-  char * charVector = (char * ) malloc(sizeof(char)); 
-  char * auxVector;
-  int lenght = 0;
-  int auxLenght = 1;
-  int nameLenght;
-  int nameCounter = 0;
-  char name[50];
   char c;
+  char name[50];
+  char * auxVector;
+  char * charVector = (char * ) malloc(sizeof(char)); 
+  int x;
+  int i;
+  int auxLenght;
+  int nameLenght;
+  int lenght = 0;
+  int nameCounter = 0;
 
-  int x, y, z;
 
   while ( 284 ) {
     printf ( "adicionar = 1\nremover = 2\nlistar = 3\nsair = 4\n" );
     scanf ( "%d", &i );
     getchar ( );
     printf ( "\n" );
-    x = z = y = 0;
+    x =  nameLenght = auxLenght = 0;
 
     nameLenght =  0;
     switch ( i ) {
       case 1:
-        while ( ( c = getchar ( ) ) != '\n' ) {
-          name[nameLenght] = c;
-          nameLenght ++;
-        }
+        while ( ( c = getchar ( ) ) != '\n' ) 
+          name[nameLenght ++] = c;
+        
+        name[nameLenght ++] = '*';
         name[nameLenght] = '\0';
 
-        auxLenght = nameLenght;
-        lenght += nameLenght;
+        lenght += auxLenght = nameLenght;
         charVector = (char *) realloc(charVector, sizeof(char) *lenght +2);
 
         nameLenght =  0;
-        charVector[lenght -auxLenght] = '*';
-        while (auxLenght > 0) {
-          charVector[1 +lenght -auxLenght] = name[nameLenght];
-          auxLenght --;
-          nameLenght ++;
-        }
-        charVector[lenght +1] = '\0';
-        nameLenght =  0;
-        lenght ++;
+        while (auxLenght >= 0) 
+          charVector[lenght -( auxLenght --)] = name[nameLenght ++];
+
         nameCounter ++;
       break;
       
       case 2:
-        x =1;
-        name[0] = '*';
-        while ( ( c = getchar () ) != '\n' ) {
-          name[x] = c;
-          x ++;
-        }
+        x = 0;
+        while ( ( c = getchar () ) != '\n' )
+          name[x ++] = c;
+        
+        if ( name[0] == '\0' )
+          break; 
+
+        name[x ++] = '*';
         name[x] = '\0';
 
-        y = 0;
-        while ( ( (auxVector) = (strstr(charVector, name)) ) ) {
+        if ( ( (auxVector) = (strstr(charVector, name)) ) ) {
           *(auxVector) = '\0';
           strcat(charVector, auxVector +x);
-          if ( charVector[0] == '\0' )
-            charVector[0] = '*';
-          else if ( lenght >= x )
+          if ( lenght >= x )
             lenght = lenght -x;
-          else 
-            lenght = 2;
           charVector = (char *) realloc( charVector, sizeof(char) * lenght );
         }
       break;
@@ -84,7 +74,6 @@ int main ( ) {
       
       case 4:
         free ( charVector );
-        free ( auxVector );
         return 0;
       break;
 
@@ -92,4 +81,5 @@ int main ( ) {
       break;
     }
   }
+  return 0;
 }
