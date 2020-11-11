@@ -9,3 +9,4 @@ void *replace_realloc(void *pont, size_t newsize){
     pont = new_ptr;
     return pont;
 }
+

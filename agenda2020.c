@@ -40,7 +40,7 @@ int main ( ) {
       printf("2: Lista\n");
       printf("3: Busca\n");
       printf("4: Apaga\n");
-      printf("5: SAIR\n");
+      printf("5: Sair\n");
       printf("Op.: ");
       scanf("%d", &vars->op);
       getchar();
@@ -131,7 +131,7 @@ void deletar ( ) {
       break;
     }
     if ( strcmp( vars->nome, agenda->nome ) == 0 ) {
-      while ( vars->i < vars->nPess ) { 
+      while ( vars->i < (vars->nPess) -1) { 
         agenda = pBuffer + sizeof(Var);
         agenda += vars->i;
         aux = pBuffer + sizeof(Var);
