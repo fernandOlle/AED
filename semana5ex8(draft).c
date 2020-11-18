@@ -11,9 +11,9 @@ int main ( ) {
 
   for (int i = 0; i < 80; i ++, vaifio ++) {
     if ( string[i] == ' ' || string[i] == '\n' ) {
+      subString[count][vaifio] = '\0';
       vaifio = -1;
       count ++;
-      
     } else 
       subString[count][vaifio] = string[i];
   }
